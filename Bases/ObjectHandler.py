@@ -292,6 +292,42 @@ class ObjectHandler:
             self.scene_spells.remove(obj)
             self.scene_doodads.remove(obj)
 
+        elif type == 0 and alignment == 0:
+            self.friendly_units.remove(obj)
+
+        elif type == 0 and alignment == 1:
+            self.neutral_units.remove(obj)
+
+        elif type == 0 and alignment == 2:
+            self.enemy_units.remove(obj)
+
+        elif type == 0 and alignment == 3:
+            self.scene_units.remove(obj)
+
+        elif type == 1 and alignment == 0:
+            self.friendly_spells.remove(obj)
+
+        elif type == 1 and alignment == 1:
+            self.neutral_spells.remove(obj)
+
+        elif type == 1 and alignment == 2:
+            self.enemy_spells.remove(obj)
+
+        elif type == 1 and alignment == 3:
+            self.scene_spells.remove(obj)
+
+        elif type == 2 and alignment == 0:
+            self.friendly_doodads.remove(obj)
+
+        elif type == 2 and alignment == 1:
+            self.neutral_doodads.remove(obj)
+
+        elif type == 2 and alignment == 2:
+            self.enemy_doodads.remove(obj)
+            
+        elif type == 2 and alignment == 3:
+            self.scene_doodads.remove(obj)
+
     def collide_objects(self, obj, collide_type, collide_alignment):
         """
         :param obj: The object you are testing if things are colliding with.
