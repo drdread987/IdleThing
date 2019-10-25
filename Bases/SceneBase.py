@@ -1,8 +1,11 @@
+import Bases.ObjectHandler
+
 
 class SceneBase:
     def __init__(self, il):
         self.next = self
         self.IL = il
+        self.OH = Bases.ObjectHandler.ObjectHandler()
 
     def process_input(self, events, pressed_keys):
         pass

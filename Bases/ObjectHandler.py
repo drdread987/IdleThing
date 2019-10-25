@@ -1,9 +1,24 @@
+import pygame.sprite
+
 
 class ObjectHandler:
 
     def __init__(self):
 
-        pass
+        self.friendly_spells = pygame.sprite.Group()
+        self.neutral_spells = pygame.sprite.Group()
+        self.enemy_spells = pygame.sprite.Group()
+        self.scene_spells = pygame.sprite.Group()
+
+        self.friendly_units = pygame.sprite.Group()
+        self.neutral_units = pygame.sprite.Group()
+        self.enemy_units = pygame.sprite.Group()
+        self.scene_units = pygame.sprite.Group()
+
+        self.friendly_doodads = pygame.sprite.Group()
+        self.neutral_doodads = pygame.sprite.Group()
+        self.enemy_doodads = pygame.sprite.Group()
+        self.scene_doodads = pygame.sprite.Group()
 
     def update_objects(self):
 
