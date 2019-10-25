@@ -12,6 +12,8 @@ class BaseObject(pygame.sprite.Sprite):
         self.width = 0
         self.height = 0
 
+        self.rect = self.image.get_rect()
+
     def update(self, scene, inputs):
 
         pass
