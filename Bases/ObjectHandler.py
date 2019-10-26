@@ -324,7 +324,7 @@ class ObjectHandler:
 
         elif type == 2 and alignment == 2:
             self.enemy_doodads.remove(obj)
-            
+
         elif type == 2 and alignment == 3:
             self.scene_doodads.remove(obj)
 
