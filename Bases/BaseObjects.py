@@ -40,6 +40,18 @@ class BaseUnit(BaseObject):
     def __init__(self, x, y):
         BaseObject.__init__(self, x, y)
 
+        self.max_health_points = 0
+        self.health_points = self.max_health_points
+
+        self.max_physical_defense = 0
+        self.physical_defense = self.max_physical_defense
+
+        self.max_magic_defense = 0
+        self.magic_defense = self.max_magic_defense
+
+        self.buffs = []
+        self.debuffs = []
+
 
 class BaseSpell(BaseObject):
 
@@ -51,3 +63,12 @@ class BaseDoodad(BaseObject):
 
     def __init__(self, x, y):
         BaseObject.__init__(self, x, y)
+
+        """
+        0 = undefined.
+        1 = block
+        2 = block you can move on to
+        3 = 
+        """
+        self.doodad_type = 0
+        self.vulnerable = 0

@@ -34,6 +34,26 @@ class ObjectHandler:
 
         pass
 
+    def does_obj_exist(self, obj):
+
+        all_groups = [self.friendly_spells,
+                      self.neutral_spells,
+                      self.enemy_spells,
+                      self.scene_spells,
+                      self.friendly_units,
+                      self.neutral_units,
+                      self.enemy_units,
+                      self.scene_units,
+                      self.friendly_doodads,
+                      self.neutral_doodads,
+                      self.enemy_doodads,
+                      self.scene_doodads]
+
+        for group in all_groups:
+            if group.has(obj):
+                return True
+        return False
+
     def get_all_objects(self):
 
         returnable = list()
