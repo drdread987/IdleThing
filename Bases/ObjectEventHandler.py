@@ -33,14 +33,12 @@ class ObjectEventHandler:
                 if subscriber[0] == source:
                     return subscriber
 
-    def event_friendly_unit_takes_damage(self, source, target, amount, dmg_type, spell_id):
+    def event_new_friendly_unit(self, source, target, unit_id):
         """
-        Event ID 0, Happens when a friendly unit takes damage.
-        :param source: Source of the damage
-        :param target: The unit that took the damage
-        :param amount: The amount of damage taken
-        :param dmg_type: the type of damage dealt
-        :param spell_id: the spell ID that created the damage
+        Event ID 0, event fires when a new friendly unit is created.
+        :param source: Who created the unit, or None if it is the Object handler
+        :param target: the unit that was created
+        :param unit_id: the ID of the unit created, see Unit docs
         :return: None
         """
         # TODO
