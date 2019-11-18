@@ -21,24 +21,33 @@ TOC:
 		16 - neutral doodad died (source, doodad_id)
 		17 - enemy doodad died (source, doodad_id)
 	18-23 Object Gains Health
-		18 - friendly unit gains health (source, target, amount, unit_id)
-		19 - neutral unit gains health (source, target, amount, unit_id)
-		20 - enemy unit gains health (source, target, amount, unit_id)
-		21 - friendly doodad gains health (source, target, amount, doodad_id)
-		22 - neutral doodad gains health (source, target, amount, doodad_id)
-		23 - enemy doodad gains health (source, target, amount, doodad_id)
+		18 - friendly unit gains health (source, target, amount_attempted, amount_actual, unit_id)
+		19 - neutral unit gains health (source, target, amount_attempted, amount_actual, unit_id)
+		20 - enemy unit gains health (source, target, amount_attempted, amount_actual, unit_id)
+		21 - friendly doodad gains health (source, target, amount_attempted, amount_actual, doodad_id)
+		22 - neutral doodad gains health (source, target, amount_attempted, amount_actual, doodad_id)
+		23 - enemy doodad gains health (source, target, amount_attempted, amount_actual, doodad_id)
 	24-29 Object Loses Health
-		24 - friendly unit loses health (source, target, amount, unit_id)
-		25 - neutral unit loses health (source, target, amount, unit_id)
-		26 - enemy unit loses health (source, target, amount, unit_id)
-		27 - friendly doodad loses health (source, target, amount, doodad_id)
-		28 - neutral doodad loses health (source, target, amount, doodad_id)
-		29 - enemy doodad loses health (source, target, amount, doodad_id)
-	30-38 Object Deals Damage
-		30 - friendly unit deals damage (source, target, amount, unit_id)
-		31 - neutral unit deals damage (source, target, amount, unit_id)
-		32 - enemy unit deals damage (source, target, amount, unit_id)
-		33 - 
+		24 - friendly unit loses health (source, target, amount_attempted, amount_actual, unit_id)
+		25 - neutral unit loses health ((source, target, amount_attempted, amount_actual, unit_id))
+		26 - enemy unit loses health (source, target, amount_attempted, amount_actual, unit_id)
+		27 - friendly doodad loses health (source, target, amount_attempted, amount_actual, doodad_id)
+		28 - neutral doodad loses health (source, target, amount_attempted, amount_actual, doodad_id)
+		29 - enemy doodad loses health (source, target, amount_attempted, amount_actual, doodad_id)
+	30-32 Spell Does Effect
+		30 - friendly spell deals damage (source, target, power, effect_type, spell_id)
+		31 - neutral spell deals damage (source, target, power, effect_type, spell_id)
+		32 - enemy spell deals damage (source, target, power, effect_type, spell_id)
+	33-41 Object Creates Spell
+		33 - friendly unit creates spell (source, target, spell_id)
+		34 - neutral unit creates spell (source, target, spell_id)
+		35 - enemy unit creates spell (source, target, spell_id)
+		36 - friendly spell creates spell (source, target, spell_id)
+		37 - neutral spell creates spell (source, target, spell_id)
+		38 - enemy spell creates spell (source, target, spell_id)
+		39 - friendly doodad creates spell (source, target, spell_id)
+		40 - neutral doodad creates spell (source, target, spell_id)
+		41 - enemy doodad creates spell (source, target, spell_id)
 	
 
 ----------------------------------------------------------------------------------------------
@@ -98,49 +107,95 @@ TOC:
 		doodad_id: the ID of the doodad, see doodad docs.
 		
 9 - friendly unit died. Fires whenever a friendly unit dies.
-	listener received variabled - source, unit_id
+	listener received variables - source, unit_id
 		source: What unit died, this unit is dead and changes should not be done to it. (it is on the heap)
 		unit_id: the ID of the unit, see unit docs.
 		
 10 - Neutral unit died. Fires whenever a neutral unit dies.
-	listener received variabled - source, unit_id
+	listener received variables - source, unit_id
 		source: What unit died, this unit is dead and changes should not be done to it. (it is on the heap)
 		unit_id: the ID of the unit, see unit docs.
 		
 11 - Enemy unit died. Fires whenever an enemy unit dies.
-	listener received variabled - source, unit_id
+	listener received variables - source, unit_id
 		source: What unit died, this unit is dead and changes should not be done to it. (it is on the heap)
 		unit_id: the ID of the unit, see unit docs.
 		
 12 - friendly spell died. Fires whenever a friendly spell dies.
-	listener received variabled - source, spell_id
+	listener received variables - source, spell_id
 		source: What spell died, this spell is dead and changes should not be done to it. (it is on the heap)
 		spell_id: the ID of the spell, see spell docs.
 		
 13 - neutral spell died. Fires whenever a neutral spell dies.
-	listener received variabled - source, spell_id
+	listener received variables - source, spell_id
 		source: What spell died, this spell is dead and changes should not be done to it. (it is on the heap)
 		spell_id: the ID of the spell, see spell docs.
 		
 14 - enemy spell died. Fires whenever an enemy spell dies.
-	listener received variabled - source, spell_id
+	listener received variables - source, spell_id
 		source: What spell died, this spell is dead and changes should not be done to it. (it is on the heap)
 		spell_id: the ID of the spell, see spell docs.
 		
 15 - friendly doodad died. Fires whenever a friendly doodad dies.
-	listener received variabled - source, doodad_id
+	listener received variables - source, doodad_id
 		source: What doodad died, this doodad is dead and changes should not be done to it. (it is on the heap)
 		doodad_id: the ID of the doodad, see doodad docs.
 		
 16 - neutral doodad died. Fires whenever a neutral doodad dies.
-	listener received variabled - source, doodad_id
+	listener received variables - source, doodad_id
 		source: What doodad died, this doodad is dead and changes should not be done to it. (it is on the heap)
 		doodad_id: the ID of the doodad, see doodad docs.
 		
 17 - enemy doodad died. Fires whenever an enemy doodad dies.
-	listener received variabled - source, doodad_id
+	listener received variables - source, doodad_id
 		source: What doodad died, this doodad is dead and changes should not be done to it. (it is on the heap)
 		doodad_id: the ID of the doodad, see doodad docs.
 		
-18 - 
+18 - friendly unit gains health. Fires whenever a friendly unit gains health, or attempts to gain health.
+	listener received variables - source, target, amount, unit_id
+		source: What object attempted to make target unit gain health.
+		target: What unit attempted to gain health.
+		amount_attempted: The amount of health attempted to be gained for the target unit.
+		amount_actual: The actual amount of health gained by the target unit.
+		unit_id: the ID of the unit, see unit docs.
+		
+19 - neutral unit gains health. Fires whenever a neutral unit gains health, or attempts to gain health.
+	listener received variables - source, target, amount, unit_id
+		source: What object attempted to make target unit gain health.
+		target: What unit attempted to gain health.
+		amount_attempted: The amount of health attempted to be gained for the target unit.
+		amount_actual: The actual amount of health gained by the target unit.
+		unit_id: the ID of the unit, see unit docs.
+		
+20 - enemy unit gains health. Fires whenever an enemy unit gains health, or attempts to gain health.
+	listener received variables - source, target, amount, unit_id
+		source: What object attempted to make target unit gain health.
+		target: What unit attempted to gain health.
+		amount_attempted: The amount of health attempted to be gained for the target unit.
+		amount_actual: The actual amount of health gained by the target unit.
+		unit_id: the ID of the unit, see unit docs.
+		
+21 - friendly doodad gains health. Fires whenever a friendly doodad gains health, or attempts to gain health.
+	listener received variables - source, target, amount, doodad_id
+		source: What object attempted to make target doodad gain health.
+		target: What doodad attempted to gain health.
+		amount_attempted: The amount of health attempted to be gained for the target doodad.
+		amount_actual: The actual amount of health gained by the target doodad.
+		doodad_id: the ID of the doodad, see doodad docs.
+		
+22 - neutral doodad gains health. Fires whenever a neutral doodad gains health, or attempts to gain health.
+	listener received variables - source, target, amount, doodad_id
+		source: What object attempted to make target doodad gain health.
+		target: What doodad attempted to gain health.
+		amount_attempted: The amount of health attempted to be gained for the target doodad.
+		amount_actual: The actual amount of health gained by the target doodad.
+		doodad_id: the ID of the doodad, see doodad docs.
+		
+23 - enemy doodad gains health. Fires whenever an enemy doodad gains health, or attempts to gain health.
+	listener received variables - source, target, amount, doodad_id
+		source: What object attempted to make target doodad gain health.
+		target: What doodad attempted to gain health.
+		amount_attempted: The amount of health attempted to be gained for the target doodad.
+		amount_actual: The actual amount of health gained by the target doodad.
+		doodad_id: the ID of the doodad, see doodad docs.
 	
