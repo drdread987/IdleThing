@@ -38,13 +38,14 @@ TOC:
 		30 - friendly spell does effect (source, target, power, effect_type, spell_id)
 		31 - neutral spell does effect (source, target, power, effect_type, spell_id)
 		32 - enemy spell does effect (source, target, power, effect_type, spell_id)
-	33-50 Scene Based Events
+	33-39 Scene Based Events
 		33 - change of scene (new_scene, environment_type, scene_id)
 		34 - change of scene environment (old_environment_type, environment_type, scene_id)
-		36 - PLACEHOLDER
-		37 - PLACEHOLDER
-		38 - PLACEHOLDER
-		39 - PLACEHOLDER
+		36 - start of sound (sound, duration, sound_id)
+		37 - end of sound (sound, duration, sound_id)
+		38 - start of sound failed (sound, duration, sound_id)
+		39 - sound queued (sound, queue_position, sound_id)
+	40-50 Placeholder events
 		40 - PLACEHOLDER
 		41 - PLACEHOLDER
 		42 - PLACEHOLDER
@@ -59,6 +60,8 @@ TOC:
 	
 
 ----------------------------------------------------------------------------------------------
+
+0-8 New Object
 
 0 - new friendly unit. Fires whenever a new friendly unit is created.
 	listener received variables - Source, target, unit_id
@@ -113,6 +116,8 @@ TOC:
 		source: who created the doodad or None if the Object handler made the object.
 		target: the doodad that was created.
 		doodad_id: the ID of the doodad, see doodad docs.
+
+9-17 Object Died
 		
 9 - friendly unit died. Fires whenever a friendly unit dies.
 	listener received variables - source, unit_id
@@ -158,6 +163,8 @@ TOC:
 	listener received variables - source, doodad_id
 		source: What doodad died, this doodad is dead and changes should not be done to it. (it is on the heap)
 		doodad_id: the ID of the doodad, see doodad docs.
+
+18-23 Object Gains Health
 		
 18 - friendly unit gains health. Fires whenever a friendly unit gains health, or attempts to gain health.
 	listener received variables - source, target, amount_attempted, amount_actual, unit_id
@@ -206,6 +213,8 @@ TOC:
 		amount_attempted: The amount of health attempted to be gained for the target doodad.
 		amount_actual: The actual amount of health gained by the target doodad.
 		doodad_id: the ID of the doodad, see doodad docs.
+
+24-29 Object Loses Health
 		
 24 - friendly unit loses health. Fires whenever a friendly unit loses health, or attempts to lose health.
 	listener received variables - source, target, amount_attempted, amount_actual, unit_id
@@ -254,6 +263,8 @@ TOC:
 		amount_attempted: The amount of health attempted to be lost for the target doodad.
 		amount_actual: The actual amount of health lost by the target doodad.
 		doodad_id: The ID of the doodad, see doodad docs.
+
+30-32 Spell Does Effect
 		
 30 - friendly spell does effect. Fires whenever a friendly spell does an effect.
 	listener received variables - source, target, power, effect_type, spell_id
@@ -278,3 +289,56 @@ TOC:
 		power: The value associated with the power of the effect.
 		effect_type: The type of effect, see spell docs.
 		spell_id: The ID of the spell, see spell docs.
+
+33-50 Scene Based Events
+
+33 - change of scene. Fires whenever the scene changes and the listener persists through the scene change.
+    listener received variables - new_scene, environment_type, scene_id
+        new_scene: The new scene object that the game is changing to.
+        environment_type: The environment type of the new scene.
+        scene_id: The unique ID for the scene, see scene docs.
+
+34 - change of scene environment. Fires whenever the scene changes its environment to a different environment.
+    listener received variables - old_environment_type, environment_type, scene_id
+        old_environment_type: The previous environment type of the scene.
+        environment_type: The new environment type of the scene.
+        scene_id: The unique ID for the scene, see scene docs.
+
+36 - start of sound. Fires whenever a new sound is played.
+    listener received variables - sound, duration, sound_id
+        sound: The sound object being started.
+        duration: The duration in milliseconds of the sound intended to be played.
+        sound_id: The unique ID for the sound, see the sound docs.
+
+37 - end of sound. Fires whenever a sound finishes playing.
+    listener received variables - sound, duration, sound_id
+        sound: The sound object that ended.
+        duration: The duration in milliseconds of the sound that was played.
+        sound_id: The unique ID for the sound, see the sound docs.
+
+38 - start of sound failed. Fires whenever a new sound fails to play.
+    listener received variables - sound, duration, sound_id
+        sound: The sound object being started that fails to play.
+        duration: The duration in milliseconds of the sound intended to be played.
+        sound_id: The unique ID for the sound, see the sound docs.
+
+39 - sound queued. Fires whenever a new sound is queued to be played.
+    listener received variables - sound, duration, sound_id
+        sound: The sound object being started.
+        queue_position: the position of the sound in the queue. 0 is front of the line.
+        sound_id: The unique ID for the sound, see the sound docs.
+        
+40-50 Placeholder events
+
+40 - PLACEHOLDER
+41 - PLACEHOLDER
+42 - PLACEHOLDER
+43 - PLACEHOLDER
+44 - PLACEHOLDER
+45 - PLACEHOLDER
+46 - PLACEHOLDER
+47 - PLACEHOLDER
+48 - PLACEHOLDER
+49 - PLACEHOLDER
+50 - PLACEHOLDER
+
