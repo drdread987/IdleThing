@@ -45,18 +45,23 @@ TOC:
 		37 - end of sound (sound, duration, sound_id)
 		38 - start of sound failed (sound, duration, sound_id)
 		39 - sound queued (sound, queue_position, sound_id)
-	40-50 Placeholder events
-		40 - PLACEHOLDER
-		41 - PLACEHOLDER
-		42 - PLACEHOLDER
-		43 - PLACEHOLDER
-		44 - PLACEHOLDER
+		40 - mouse button pressed down (button, x_pos, y_pos)
+		41 - mouse button released (button, x_pos, y_pos)
+		42 - mouse dragged (buttons, x_pos, y_pos)
+		43 - key pressed down (key, mod)
+		44 - key released (key, mod)
+	45-55 Placeholder events
 		45 - PLACEHOLDER
 		46 - PLACEHOLDER
 		47 - PLACEHOLDER
 		48 - PLACEHOLDER
 		49 - PLACEHOLDER
 		50 - PLACEHOLDER
+		51 - PLACEHOLDER
+		52 - PLACEHOLDER
+		53 - PLACEHOLDER
+		54 - PLACEHOLDER
+		55 - PLACEHOLDER
 	
 
 ----------------------------------------------------------------------------------------------
@@ -327,18 +332,25 @@ TOC:
         sound: The sound object being started.
         queue_position: the position of the sound in the queue. 0 is front of the line.
         sound_id: The unique ID for the sound, see the sound docs.
-        
-40-50 Placeholder events
 
-40 - PLACEHOLDER
-41 - PLACEHOLDER
-42 - PLACEHOLDER
-43 - PLACEHOLDER
-44 - PLACEHOLDER
+40 - mouse button pressed down (button, x_pos, y_pos)
+41 - mouse button released (button, x_pos, y_pos)
+42 - mouse dragged (buttons, x_pos, y_pos)
+43 - key pressed down (key, mod)
+44 - key released (key, mod)
+
+45-55 Placeholder events
+
 45 - PLACEHOLDER
 46 - PLACEHOLDER
 47 - PLACEHOLDER
 48 - PLACEHOLDER
 49 - PLACEHOLDER
 50 - PLACEHOLDER
+51 - PLACEHOLDER
+52 - PLACEHOLDER
+53 - PLACEHOLDER
+54 - PLACEHOLDER
+55 - PLACEHOLDER
+
 
