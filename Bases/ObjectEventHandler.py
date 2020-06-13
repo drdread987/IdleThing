@@ -27,19 +27,41 @@ class ObjectEventHandler:
             self.listeners[event_key] = [[source, callback, lifespan, args]]
 
     def find_subscriber_by_event(self, event_key, source):
-
+        """
+        See if the source is a subscriber to an event.
+        :param event_key: the key for the event, view the event docs for which key to use.
+        :param source: The object that is the subscriber of the event.
+        :return: bool return on if the source is a subscriber to the event
+        """
         if event_key in self.listeners:
             for subscriber in self.listeners[event_key]:
                 if subscriber[0] == source:
-                    return subscriber
+                    return True
+        return False
 
-    def event_new_friendly_unit(self, source, target, unit_id):
+    def event(self, event_key, *args):
         """
-        Event ID 0, event fires when a new friendly unit is created.
-        :param source: Who created the unit, or None if it is the Object handler
-        :param target: the unit that was created
-        :param unit_id: the ID of the unit created, see Unit docs
-        :return: None
+        Event Happens, let listeners know
+        :param event_key: the key for the event, view the event docs for which key to use.
+        :param args:
+        :return:
         """
-        # TODO
-        pass
+
+        expired_subscribers = []
+
+        if event_key in self.listeners:
+            for subscriber in self.listeners[event_key]:
+                self.listeners[subscriber][2] = self.listeners[subscriber][2] - 1
+                if self.listeners[subscriber][2] == 0:
+                    expired_subscribers.insert(0, subscriber)
+
+                if self.listeners[subscriber][3].length > 0:
+                    # if the subscriber had arguments they wanted passed when the event fired we pass those too
+                    self.listeners[subscriber][1](*args, *self.listeners[subscriber][3])
+                else:
+                    # otherwise we just pass the expected parameters
+                    self.listeners[subscriber][1](*args)
+
+        for expired_subscriber in expired_subscribers:
+            del self.listeners[expired_subscriber]
+
