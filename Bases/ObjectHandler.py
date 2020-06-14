@@ -1,4 +1,5 @@
 import pygame.sprite
+import Bases.ObjectEventHandler
 
 
 class ObjectHandler:
@@ -19,6 +20,8 @@ class ObjectHandler:
         self.neutral_doodads = pygame.sprite.Group()
         self.enemy_doodads = pygame.sprite.Group()
         self.scene_doodads = pygame.sprite.Group()
+
+        self.OEH = Bases.ObjectEventHandler.ObjectEventHandler(self)
 
     def update_objects(self):
 

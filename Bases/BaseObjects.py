@@ -14,6 +14,8 @@ class BaseObject(pygame.sprite.Sprite):
         self.x = x
         self.y = y
 
+        self.alignment = "neutral"
+
     def update(self, scene, inputs):
 
         if self.interactive:
@@ -52,11 +54,60 @@ class BaseUnit(BaseObject):
         self.buffs = []
         self.debuffs = []
 
+        self.easy_remove = True
+        self.unit_id = 0
+
+    def take_damage(self, damage_type, value, actor, scene):
+
+        raw_damage = value
+
+        for buff in self.buffs:
+            value = self.buffs[buff].damage_taken(damage_type, value)
+
+        for debuff in self.debuffs:
+            value = self.debuffs[debuff].damage_taken(damage_type, value)
+
+        self.health_points -= value
+        event_key = 24
+        if self.alignment == "friendly":
+            event_key = 24
+        elif self.alignment == "neutral":
+            event_key = 25
+        elif self.alignment == "enemy":
+            event_key = 26
+
+        scene.OEH.event(event_key, actor, self, raw_damage, value, self.unit_id)
+
+        if self.health_points < 0:
+            self.death(actor, scene)
+
+    def death(self, actor, scene):
+        death = True
+        for buff in self.buffs:
+            death = self.buffs[buff].damage_taken(death, actor)
+
+        for debuff in self.debuffs:
+            death = self.debuffs[debuff].damage_taken(death, actor)
+
+        event_key = 9
+        if self.alignment == "friendly":
+            event_key = 9
+        elif self.alignment == "neutral":
+            event_key = 10
+        elif self.alignment == "enemy":
+            event_key = 11
+
+        if self.easy_remove and death:
+            scene.OEH.event(event_key, self, self.unit_id)
+            self.kill()
+
 
 class BaseSpell(BaseObject):
 
     def __init__(self, x, y):
         BaseObject.__init__(self, x, y)
+
+        self.spell_id = 0
 
 
 class BaseDoodad(BaseObject):
@@ -71,4 +122,5 @@ class BaseDoodad(BaseObject):
         3 = 
         """
         self.doodad_type = 0
+        self.doodad_id = 0
         self.vulnerable = 0
