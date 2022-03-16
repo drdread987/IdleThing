@@ -23,9 +23,23 @@ class ObjectHandler:
 
         self.OEH = Bases.ObjectEventHandler.ObjectEventHandler(self)
 
-    def update_objects(self):
+    def update_objects(self, scene, i_events, pressed_keys):
 
-        pass
+        all_groups = [self.friendly_spells,
+                      self.neutral_spells,
+                      self.enemy_spells,
+                      self.scene_spells,
+                      self.friendly_units,
+                      self.neutral_units,
+                      self.enemy_units,
+                      self.scene_units,
+                      self.friendly_doodads,
+                      self.neutral_doodads,
+                      self.enemy_doodads,
+                      self.scene_doodads]
+
+        for group in all_groups:
+            group.update(scene, i_events, pressed_keys)
 
     def draw_objects(self, surface):
         """
@@ -245,30 +259,39 @@ class ObjectHandler:
         if obj_type == 0:
             if alignment == 0:
                 self.friendly_units.add(obj)
+                self.OEH.event(0, obj, obj.unit_id)
             elif alignment == 1:
                 self.neutral_units.add(obj)
+                self.OEH.event(1, obj, obj.unit_id)
             elif alignment == 2:
                 self.enemy_units.add(obj)
+                self.OEH.event(2, obj, obj.unit_id)
             elif alignment == 3:
                 self.scene_units.add(obj)
 
         elif obj_type == 1:
             if alignment == 0:
                 self.friendly_spells.add(obj)
+                self.OEH.event(3, obj, obj.spell_id)
             elif alignment == 1:
                 self.neutral_spells.add(obj)
+                self.OEH.event(4, obj, obj.spell_id)
             elif alignment == 2:
                 self.enemy_spells.add(obj)
+                self.OEH.event(5, obj, obj.spell_id)
             elif alignment == 3:
                 self.scene_spells.add(obj)
 
         elif obj_type == 2:
             if alignment == 0:
                 self.friendly_doodads.add(obj)
+                self.OEH.event(6, obj, obj.doodad_id)
             elif alignment == 1:
                 self.neutral_doodads.add(obj)
+                self.OEH.event(7, obj, obj.doodad_id)
             elif alignment == 2:
                 self.enemy_doodads.add(obj)
+                self.OEH.event(8, obj, obj.doodad_id)
             elif alignment == 3:
                 self.scene_doodads.add(obj)
 
@@ -361,8 +384,26 @@ class ObjectHandler:
         :return: List of objects, empty if no collision.
         """
 
-        pass
+        if collide_type == 0:
+            if collide_alignment == 0:
+                return pygame.sprite.spritecollide(obj, self.friendly_units, False)
+            elif collide_alignment == 1:
+                return pygame.sprite.spritecollide(obj, self.neutral_units, False)
+            elif collide_alignment == 2:
+                return pygame.sprite.spritecollide(obj, self.enemy_units, False)
+        elif collide_type == 1:
+            if collide_alignment == 0:
+                return pygame.sprite.spritecollide(obj, self.friendly_spells, False)
+            elif collide_alignment == 1:
+                return pygame.sprite.spritecollide(obj, self.neutral_spells, False)
+            elif collide_alignment == 2:
+                return pygame.sprite.spritecollide(obj, self.enemy_spells, False)
+        elif collide_type == 2:
+            if collide_alignment == 0:
+                return pygame.sprite.spritecollide(obj, self.friendly_doodads, False)
+            elif collide_alignment == 1:
+                return pygame.sprite.spritecollide(obj, self.neutral_doodads, False)
+            elif collide_alignment == 2:
+                return pygame.sprite.spritecollide(obj, self.enemy_doodads, False)
 
-    def load_objects(self, instructions):
-
-        pass
+        return []

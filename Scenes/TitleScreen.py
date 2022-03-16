@@ -8,13 +8,12 @@ class TitleScene(SceneBase):
         SceneBase.__init__(self, il)
 
         self.scene_background = self.IL.load_image(ImageEnum.TitleBackground)
+        self.environment_type = "MENU"
 
     def process_input(self, events, pressed_keys):
-        for event in events:
-            pass
-
-    def update(self):
-        pass
+        SceneBase.process_input(self, events, pressed_keys)
 
     def render(self, screen):
         screen.blit(self.scene_background, (0, 0))
+        SceneBase.render(self, screen)
+

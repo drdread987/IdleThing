@@ -1,15 +1,15 @@
 
 TOC:
 	0-8 New Object
-		0 - new friendly unit (source, target, unit_id)
-		1 - new neutral unit (source, target, unit_id)
-		2 - new enemy unit (source, target, unit_id)
-		3 - new friendly spell (source, target, spell_id)
-		4 - new neutral spell (source, target, spell_id)
-		5 - new enemy spell (source, target, spell_id)
-		6 - new friendly doodad (source, target, doodad_id)
-		7 - new neutral doodad (source, target, doodad_id)
-		8 - new enemy doodad (source, target, doodad_id)
+		0 - new friendly unit (target, unit_id)
+		1 - new neutral unit (target, unit_id)
+		2 - new enemy unit (target, unit_id)
+		3 - new friendly spell (target, spell_id)
+		4 - new neutral spell (target, spell_id)
+		5 - new enemy spell (target, spell_id)
+		6 - new friendly doodad (target, doodad_id)
+		7 - new neutral doodad (target, doodad_id)
+		8 - new enemy doodad (target, doodad_id)
 	9-17 Object Died
 		9 - friendly unit died (source, unit_id)
 		10 - neutral unit died (source, unit_id)
@@ -39,7 +39,7 @@ TOC:
 		31 - neutral spell does effect (source, target, power, effect_type, spell_id)
 		32 - enemy spell does effect (source, target, power, effect_type, spell_id)
 	33-39 Scene Based Events
-		33 - change of scene (new_scene, environment_type, scene_id)
+		33 - change of scene (new_scene, environment_type, scene_id) -- not working or in place
 		34 - change of scene environment (old_environment_type, environment_type, scene_id)
 		36 - start of sound (sound, duration, sound_id)
 		37 - end of sound (sound, duration, sound_id)
@@ -69,56 +69,47 @@ TOC:
 0-8 New Object
 
 0 - new friendly unit. Fires whenever a new friendly unit is created.
-	listener received variables - Source, target, unit_id
-		source: who created the unit or None if the Object handler made the object.
+	listener received variables - target, unit_id
 		target: the unit that was created.
 		unit_id: the ID of the unit, see unit docs.
 
 1 - new neutral unit. Fires whenever a new neutral unit is created.
-	listener received variables - Source, target, unit_id
-		source: who created the unit or None if the Object handler made the object.
+	listener received variables - target, unit_id
 		target: the unit that was created.
 		unit_id: the ID of the unit, see unit docs.
 		
 2 - new enemy unit. Fires whenever a new enemy unit is created.
-	listener received variables - Source, target, unit_id
-		source: who created the unit or None if the Object handler made the object.
+	listener received variables - target, unit_id
 		target: the unit that was created.
 		unit_id: the ID of the unit, see unit docs.
 		
 3 - new friendly spell. Fires whenever a new friendly spell is created.
-	listener received variables - Source, target, spell_id
-		source: who created the spell or None if the Object handler made the object.
+	listener received variables - target, spell_id
 		target: the spell that was created.
 		spell_id: the ID of the spell, see spell docs.
 		
 4 - new neutral spell. Fires whenever a new neutral spell is created.
-	listener received variables - Source, target, spell_id
-		source: who created the spell or None if the Object handler made the object.
+	listener received variables - target, spell_id
 		target: the spell that was created.
 		spell_id: the ID of the spell, see spell docs.
 		
 5 - new enemy spell. Fires whenever a new enemy spell is created.
-	listener received variables - Source, target, spell_id
-		source: who created the spell or None if the Object handler made the object.
+	listener received variables - target, spell_id
 		target: the spell that was created.
 		spell_id: the ID of the spell, see spell docs.
 
 6 - new friendly doodad. Fires whenever a new friendly doodad is created.
-	listener received variables - Source, target, doodad_id
-		source: who created the doodad or None if the Object handler made the object.
+	listener received variables - target, doodad_id
 		target: the doodad that was created.
 		doodad_id: the ID of the doodad, see doodad docs.
 		
 7 - new neutral doodad. Fires whenever a new neutral doodad is created.
-	listener received variables - Source, target, doodad_id
-		source: who created the doodad or None if the Object handler made the object.
+	listener received variables - target, doodad_id
 		target: the doodad that was created.
 		doodad_id: the ID of the doodad, see doodad docs.
 		
 8 - new enemy doodad. Fires whenever a new enemy doodad is created.
-	listener received variables - Source, target, doodad_id
-		source: who created the doodad or None if the Object handler made the object.
+	listener received variables - target, doodad_id
 		target: the doodad that was created.
 		doodad_id: the ID of the doodad, see doodad docs.
 
