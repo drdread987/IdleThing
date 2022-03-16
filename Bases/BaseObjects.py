@@ -3,8 +3,8 @@ import pygame.sprite
 
 class BaseObject(pygame.sprite.Sprite):
 
-    def __init__(self, x=0, y=0):
-        pygame.sprite.Sprite.__init__(self)
+    def __init__(self, oh, il, x, y):
+        super().__init__()
 
         self.image = pygame.Surface([0, 0])
 
@@ -23,7 +23,7 @@ class BaseObject(pygame.sprite.Sprite):
 
     def render(self, canvas):
 
-        pass
+        canvas.blit(self.image, (self.x, self.y))
 
     def interaction(self, scene, i_events, inputs):
 
@@ -43,8 +43,8 @@ class BaseObject(pygame.sprite.Sprite):
 
 class BaseUnit(BaseObject):
 
-    def __init__(self, x, y):
-        BaseObject.__init__(self, x, y)
+    def __init__(self, oh, il, x, y):
+        super().__init__(oh, il, x, y)
 
         self.max_health_points = 0
         self.health_points = self.max_health_points
@@ -130,16 +130,16 @@ class BaseUnit(BaseObject):
 
 class BaseSpell(BaseObject):
 
-    def __init__(self, x, y):
-        BaseObject.__init__(self, x, y)
+    def __init__(self, oh, il, x, y):
+        BaseObject.__init__(self, oh, il, x, y)
 
         self.spell_id = 0
 
 
 class BaseDoodad(BaseObject):
 
-    def __init__(self, x, y):
-        BaseObject.__init__(self, x, y)
+    def __init__(self, oh, il, x, y):
+        BaseObject.__init__(self, oh, il, x, y)
 
         """
         0 = undefined.

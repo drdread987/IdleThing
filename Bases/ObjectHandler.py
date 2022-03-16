@@ -48,8 +48,9 @@ class ObjectHandler:
         :param surface: the surface to draw our objects on to.
         :return: none
         """
-
-        pass
+        objs = self.get_all_objects()
+        for obj in objs:
+            obj.render(surface)
 
     def does_obj_exist(self, obj):
 
@@ -75,20 +76,20 @@ class ObjectHandler:
 
         returnable = list()
 
-        returnable.append(self.friendly_units.sprites())
-        returnable.append(self.neutral_units.sprites())
-        returnable.append(self.enemy_units.sprites())
-        returnable.append(self.scene_units.sprites())
+        returnable.extend(self.friendly_units.sprites())
+        returnable.extend(self.neutral_units.sprites())
+        returnable.extend(self.enemy_units.sprites())
+        returnable.extend(self.scene_units.sprites())
 
-        returnable.append(self.friendly_spells.sprites())
-        returnable.append(self.neutral_spells.sprites())
-        returnable.append(self.enemy_spells.sprites())
-        returnable.append(self.scene_spells.sprites())
+        returnable.extend(self.friendly_spells.sprites())
+        returnable.extend(self.neutral_spells.sprites())
+        returnable.extend(self.enemy_spells.sprites())
+        returnable.extend(self.scene_spells.sprites())
 
-        returnable.append(self.friendly_doodads.sprites())
-        returnable.append(self.neutral_doodads.sprites())
-        returnable.append(self.enemy_doodads.sprites())
-        returnable.append(self.scene_doodads.sprites())
+        returnable.extend(self.friendly_doodads.sprites())
+        returnable.extend(self.neutral_doodads.sprites())
+        returnable.extend(self.enemy_doodads.sprites())
+        returnable.extend(self.scene_doodads.sprites())
 
         return returnable
 
@@ -96,9 +97,9 @@ class ObjectHandler:
 
         returnable = list()
 
-        returnable.append(self.friendly_units.sprites())
-        returnable.append(self.friendly_spells.sprites())
-        returnable.append(self.friendly_doodads.sprites())
+        returnable.extend(self.friendly_units.sprites())
+        returnable.extend(self.friendly_spells.sprites())
+        returnable.extend(self.friendly_doodads.sprites())
 
         return returnable
 
@@ -106,9 +107,9 @@ class ObjectHandler:
 
         returnable = list()
 
-        returnable.append(self.neutral_units.sprites())
-        returnable.append(self.neutral_spells.sprites())
-        returnable.append(self.neutral_doodads.sprites())
+        returnable.extend(self.neutral_units.sprites())
+        returnable.extend(self.neutral_spells.sprites())
+        returnable.extend(self.neutral_doodads.sprites())
 
         return returnable
 
@@ -116,9 +117,9 @@ class ObjectHandler:
 
         returnable = list()
 
-        returnable.append(self.enemy_units.sprites())
-        returnable.append(self.enemy_spells.sprites())
-        returnable.append(self.enemy_doodads.sprites())
+        returnable.extend(self.enemy_units.sprites())
+        returnable.extend(self.enemy_spells.sprites())
+        returnable.extend(self.enemy_doodads.sprites())
 
         return returnable
 
@@ -126,47 +127,47 @@ class ObjectHandler:
 
         returnable = list()
 
-        returnable.append(self.scene_units.sprites())
-        returnable.append(self.scene_spells.sprites())
-        returnable.append(self.scene_doodads.sprites())
+        returnable.extend(self.scene_units.sprites())
+        returnable.extend(self.scene_spells.sprites())
+        returnable.extend(self.scene_doodads.sprites())
 
         return returnable
 
     def get_units(self):
         returnable = list()
 
-        returnable.append(self.friendly_units.sprites())
-        returnable.append(self.neutral_units.sprites())
-        returnable.append(self.enemy_units.sprites())
-        returnable.append(self.scene_units.sprites())
+        returnable.extend(self.friendly_units.sprites())
+        returnable.extend(self.neutral_units.sprites())
+        returnable.extend(self.enemy_units.sprites())
+        returnable.extend(self.scene_units.sprites())
 
         return returnable
 
     def get_friendly_units(self):
         returnable = list()
 
-        returnable.append(self.friendly_units.sprites())
+        returnable.extend(self.friendly_units.sprites())
 
         return returnable
 
     def get_neutral_units(self):
         returnable = list()
 
-        returnable.append(self.neutral_units.sprites())
+        returnable.extend(self.neutral_units.sprites())
 
         return returnable
 
     def get_enemy_units(self):
         returnable = list()
 
-        returnable.append(self.enemy_units.sprites())
+        returnable.extend(self.enemy_units.sprites())
 
         return returnable
 
     def get_scene_units(self):
         returnable = list()
 
-        returnable.append(self.scene_units.sprites())
+        returnable.extend(self.scene_units.sprites())
 
         return returnable
 
@@ -174,38 +175,38 @@ class ObjectHandler:
 
         returnable = list()
 
-        returnable.append(self.friendly_spells.sprites())
-        returnable.append(self.neutral_spells.sprites())
-        returnable.append(self.enemy_spells.sprites())
-        returnable.append(self.scene_spells.sprites())
+        returnable.extend(self.friendly_spells.sprites())
+        returnable.extend(self.neutral_spells.sprites())
+        returnable.extend(self.enemy_spells.sprites())
+        returnable.extend(self.scene_spells.sprites())
 
         return returnable
 
     def get_friendly_spells(self):
         returnable = list()
 
-        returnable.append(self.friendly_spells.sprites())
+        returnable.extend(self.friendly_spells.sprites())
 
         return returnable
 
     def get_neutral_spells(self):
         returnable = list()
 
-        returnable.append(self.neutral_spells.sprites())
+        returnable.extend(self.neutral_spells.sprites())
 
         return returnable
 
     def get_enemy_spells(self):
         returnable = list()
 
-        returnable.append(self.enemy_spells.sprites())
+        returnable.extend(self.enemy_spells.sprites())
 
         return returnable
 
     def get_scene_spells(self):
         returnable = list()
 
-        returnable.append(self.scene_spells.sprites())
+        returnable.extend(self.scene_spells.sprites())
 
         return returnable
 
@@ -213,38 +214,38 @@ class ObjectHandler:
 
         returnable = list()
 
-        returnable.append(self.friendly_doodads.sprites())
-        returnable.append(self.neutral_doodads.sprites())
-        returnable.append(self.enemy_doodads.sprites())
-        returnable.append(self.scene_doodads.sprites())
+        returnable.extend(self.friendly_doodads.sprites())
+        returnable.extend(self.neutral_doodads.sprites())
+        returnable.extend(self.enemy_doodads.sprites())
+        returnable.extend(self.scene_doodads.sprites())
 
         return returnable
 
     def get_friendly_doodads(self):
         returnable = list()
 
-        returnable.append(self.friendly_doodads.sprites())
+        returnable.extend(self.friendly_doodads.sprites())
 
         return returnable
 
     def get_neutral_doodads(self):
         returnable = list()
 
-        returnable.append(self.neutral_doodads.sprites())
+        returnable.extend(self.neutral_doodads.sprites())
 
         return returnable
 
     def get_enemy_doodads(self):
         returnable = list()
 
-        returnable.append(self.enemy_doodads.sprites())
+        returnable.extend(self.enemy_doodads.sprites())
 
         return returnable
 
     def get_scene_doodads(self):
         returnable = list()
 
-        returnable.append(self.scene_doodads.sprites())
+        returnable.extend(self.scene_doodads.sprites())
 
         return returnable
 

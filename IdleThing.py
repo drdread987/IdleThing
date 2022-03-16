@@ -9,9 +9,9 @@ def run_game(width, height, fps, starting_scene):
     clock = pygame.time.Clock()
 
     active_scene = starting_scene
-
+    pressed_keys = []
     while active_scene is not None:
-        pressed_keys = pygame.key.get_pressed()
+
 
         # event filtering
         filtered_events = []
@@ -20,11 +20,16 @@ def run_game(width, height, fps, starting_scene):
             if event.type == pygame.QUIT:
                 quit_attempt = True
             elif event.type == pygame.KEYDOWN:
-                alt_pressed = pressed_keys[pygame.K_LALT] or pressed_keys[pygame.K_RALT]
+                alt_pressed = pygame.K_LALT in pressed_keys or pygame.K_RALT in pressed_keys
                 if event.key == pygame.K_ESCAPE:
                     quit_attempt = True
                 elif event.key == pygame.K_F4 and alt_pressed:
                     quit_attempt = True
+                elif event.key not in pressed_keys:
+                    pressed_keys.append(event.key)
+            elif event.type == pygame.KEYUP:
+                if event.key in pressed_keys:
+                    pressed_keys.remove(event.key)
 
             if quit_attempt:
                 active_scene.terminate()

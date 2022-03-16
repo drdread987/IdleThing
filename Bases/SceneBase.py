@@ -37,8 +37,7 @@ class SceneBase:
             elif key == pygame.K_LCTRL or key == pygame.K_RCTRL:
                 modifiers.append('CONTROL')
         for key in pressed_keys:
-            if key not in self.pressed_keys:
-                self.OH.OEH.event(43, key, modifiers)
+            self.OH.OEH.event(43, key, modifiers)
         for key in self.pressed_keys:
             if key not in pressed_keys:
                 self.OH.OEH.event(44, key, modifiers)

@@ -7,7 +7,7 @@ class ObjectEventHandler:
         :param obj_handler: The parent obj handler that the event handler will use to check if
                             objects are alive.
         """
-        self.listeners = {}  # {event-type: {publisher: {caller: [function to call, *args]}}}
+        self.listeners = {}  # {event-type: [[source, callback, lifespan, *args],...]}
         self.parent = obj_handler
 
     def add_listener(self, event_key, source, callback, lifespan, *args):
@@ -50,17 +50,19 @@ class ObjectEventHandler:
         expired_subscribers = []
 
         if event_key in self.listeners:
+            counter = 0
             for subscriber in self.listeners[event_key]:
-                self.listeners[subscriber][2] = self.listeners[subscriber][2] - 1
-                if self.listeners[subscriber][2] == 0:
-                    expired_subscribers.insert(0, subscriber)
+                subscriber[2] = subscriber[2] - 1
+                if subscriber[2] == 0:
+                    expired_subscribers.insert(0, counter)
 
-                if self.listeners[subscriber][3].length > 0:
+                if len(subscriber[3]) > 0:
                     # if the subscriber had arguments they wanted passed when the event fired we pass those too
-                    self.listeners[subscriber][1](*args, *self.listeners[subscriber][3])
+                    subscriber[1](*args, *subscriber[3])
                 else:
                     # otherwise we just pass the expected parameters
-                    self.listeners[subscriber][1](*args)
+                    subscriber[1](*args)
+                counter += 1
 
         for expired_subscriber in expired_subscribers:
             del self.listeners[expired_subscriber]

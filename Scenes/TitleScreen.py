@@ -1,6 +1,7 @@
 from Bases.SceneBase import SceneBase
 import pygame
 from Tools.Images import ImageEnum
+from Objs import TitleSceneObjs
 
 
 class TitleScene(SceneBase):
@@ -9,6 +10,8 @@ class TitleScene(SceneBase):
 
         self.scene_background = self.IL.load_image(ImageEnum.TitleBackground)
         self.environment_type = "MENU"
+
+        self.OH.new_object(TitleSceneObjs.NormalSquare(self.OH, self.IL, 0, 0), 0, 0)
 
     def process_input(self, events, pressed_keys):
         SceneBase.process_input(self, events, pressed_keys)
