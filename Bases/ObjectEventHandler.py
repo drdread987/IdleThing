@@ -26,6 +26,19 @@ class ObjectEventHandler:
         else:
             self.listeners[event_key] = [[source, callback, lifespan, args]]
 
+    def remove_listener(self, source):
+
+        for event_key in self.listeners:
+            spots = []
+            counter = 0
+            for listener in self.listeners[event_key]:
+                if listener[0] == source:
+                    spots.insert(0, counter)
+                counter += 1
+
+            for spot in spots:
+                del self.listeners[event_key][spot]
+
     def find_subscriber_by_event(self, event_key, source):
         """
         See if the source is a subscriber to an event.
@@ -53,9 +66,11 @@ class ObjectEventHandler:
             counter = 0
             for subscriber in self.listeners[event_key]:
                 subscriber[2] = subscriber[2] - 1
+                if subscriber[0].dead:
+                    expired_subscribers.insert(0, [counter, event_key])
+                    continue
                 if subscriber[2] == 0:
-                    expired_subscribers.insert(0, counter)
-
+                    expired_subscribers.insert(0, [counter, event_key])
                 if len(subscriber[3]) > 0:
                     # if the subscriber had arguments they wanted passed when the event fired we pass those too
                     subscriber[1](*args, *subscriber[3])
@@ -65,5 +80,6 @@ class ObjectEventHandler:
                 counter += 1
 
         for expired_subscriber in expired_subscribers:
-            del self.listeners[expired_subscriber]
+            print(self.listeners, expired_subscribers, expired_subscriber)
+            del self.listeners[expired_subscriber[1]][expired_subscriber[0]]
 

@@ -15,11 +15,16 @@ class BaseObject(pygame.sprite.Sprite):
         self.y = y
         self.update_rect()
         self.alignment = "neutral"
+        self.dead = False
+
+        self.oh = oh
 
     def update(self, scene, i_events, inputs):
 
         if self.interactive:
             self.interaction(scene, i_events, inputs)
+
+        self.update_rect()
 
     def render(self, canvas):
 
@@ -82,7 +87,7 @@ class BaseUnit(BaseObject):
 
         scene.OEH.event(event_key, actor, self, raw_damage, value, self.unit_id)
 
-        if self.health_points < 0:
+        if self.health_points <= 0:
             self.death(actor, scene)
 
     def gain_health(self, value, actor, scene):
@@ -126,6 +131,8 @@ class BaseUnit(BaseObject):
         if self.easy_remove and death:
             scene.OEH.event(event_key, self, self.unit_id)
             self.kill()
+            self.dead = True
+            scene.OEH.remove_listener(self)
 
 
 class BaseSpell(BaseObject):

@@ -49,6 +49,7 @@ class ObjectHandler:
         :return: none
         """
         objs = self.get_all_objects()
+        objs.reverse()
         for obj in objs:
             obj.render(surface)
 

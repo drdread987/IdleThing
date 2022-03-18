@@ -29,3 +29,4 @@ class ImageEnum(Enum):
 
     TitleBackground = "resources/backgrounds/Title_screen_background.png"
     DNE = "resources/DNE.png"
+    Bush = "resources/bush.png"

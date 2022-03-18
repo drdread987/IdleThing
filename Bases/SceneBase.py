@@ -11,7 +11,7 @@ class SceneBase:
         self.pressed_keys = []
         self.environment_type = "DEFAULT"
 
-    def process_input(self, events, pressed_keys):
+    def process_input(self, events, pressed_keys_n):
         self.interactive_events = events
         for event in self.interactive_events:
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -22,27 +22,20 @@ class SceneBase:
                 self.OH.OEH.event(42, event.buttons, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
 
         modifiers = []
-        for key in pressed_keys:
-            if key == pygame.K_LALT or key == pygame.K_RALT:
-                modifiers.append('ALT')
-            elif key == pygame.K_LSHIFT or key == pygame.K_RSHIFT:
-                modifiers.append('SHIFT')
-            elif key == pygame.K_LCTRL or key == pygame.K_RCTRL:
-                modifiers.append('CONTROL')
-        for key in self.pressed_keys:
-            if key == pygame.K_LALT or key == pygame.K_RALT:
-                modifiers.append('ALT')
-            elif key == pygame.K_LSHIFT or key == pygame.K_RSHIFT:
-                modifiers.append('SHIFT')
-            elif key == pygame.K_LCTRL or key == pygame.K_RCTRL:
-                modifiers.append('CONTROL')
-        for key in pressed_keys:
+        if pygame.K_LALT in pressed_keys_n or pygame.K_RALT in pressed_keys_n:
+            modifiers.append('ALT')
+        if pygame.K_LSHIFT in pressed_keys_n or pygame.K_RSHIFT in pressed_keys_n:
+            modifiers.append('SHIFT')
+        if pygame.K_LCTRL in pressed_keys_n or pygame.K_RCTRL in pressed_keys_n:
+            modifiers.append('CONTROL')
+
+        for key in pressed_keys_n:
             self.OH.OEH.event(43, key, modifiers)
         for key in self.pressed_keys:
-            if key not in pressed_keys:
+            if key not in pressed_keys_n:
                 self.OH.OEH.event(44, key, modifiers)
 
-        self.pressed_keys = pressed_keys
+        self.pressed_keys = list(pressed_keys_n)
 
     def update(self, screen):
         self.OH.update_objects(screen, self.interactive_events, self.pressed_keys)
