@@ -1,18 +1,28 @@
 from Scenes.TitleScreen import TitleScene
 import pygame
 import Tools.Images
+import datetime
 
 
 def run_game(width, height, fps, starting_scene):
     pygame.init()
     screen = pygame.display.set_mode((width, height))
     clock = pygame.time.Clock()
-
+    current_time = datetime.datetime.now()
+    time_passed = datetime.datetime.now() - current_time
     active_scene = starting_scene
     pressed_keys = []
+    frames = 0
     while active_scene is not None:
 
-
+        new_time = datetime.datetime.now()
+        time_passed += new_time - current_time
+        current_time = new_time
+        frames += 1
+        if time_passed > datetime.timedelta(seconds=1):
+            print("FPS: " + str(frames))
+            frames = 0
+            time_passed = datetime.timedelta(seconds=0)
         # event filtering
         filtered_events = []
         for event in pygame.event.get():

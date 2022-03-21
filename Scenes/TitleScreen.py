@@ -12,7 +12,7 @@ class TitleScene(SceneBase):
         self.environment_type = "MENU"
 
         self.OH.new_object(TitleSceneObjs.NormalSquare(self.OH, self.IL, 0, 0), 0, 0)
-        for x in range(500):
+        for x in range(200):
             self.OH.new_object(TitleSceneObjs.NormalBlock(self.OH, self.IL, 250, 250), 2, 1)
 
     def process_input(self, events, pressed_keys):
